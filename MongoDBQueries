@@ -1,0 +1,104 @@
+PS C:\Program Files\MongoDBShell\mongosh-1.8.0-win32-x64\mongosh-1.8.0-win32-x64\bin> .\mongosh.exe 
+
+show databases;
+
+use FuelStationDatabase;
+
+show collections;
+
+/******* FuelSale Queries *****************/
+db.createCollection('fuel-sale');
+
+db.getCollection('fuel-sale').insertOne({
+"grade" : "Regular", 
+"volume" : 158.2, 
+"sale" : 356.02, 
+"profit" : 40.2, 
+"margin" : 50.1,
+"strsaledate":"2023-04-28",
+"saledate": new ISODate("2023-04-28")
+});
+
+
+db.getCollection('fuel-sale').insertMany([
+{"grade" : "Plus", "volume" : 58.2, "sale" : 35.02, "profit" : 45.2, "margin" : 54.1, "strsaledate":"2023-04-28", "saledate": new ISODate("2023-04-28")},
+{"grade" : "Premium", "volume" : 18.2, "sale" : 56.02, "profit" : 14.2, "margin" : 70.1, "strsaledate":"2023-04-28", "saledate": new ISODate("2023-04-28")},
+{"grade" : "Disel", "volume" : 15.2, "sale" : 36.02, "profit" : 56.2, "margin" : 15.1, "strsaledate":"2023-04-28", "saledate": new ISODate("2023-04-28")}
+]);
+
+
+db.getCollection('fuel-sale').updateOne (
+{ "grade": "Disel" },
+{ $set: { "saledate": new Date() } }
+);
+
+db.getCollection('fuel-sale').find();
+
+db.getCollection('fuel-sale').find({"saledate":"2023-04-19T00:00:00.000Z"});
+
+db.mycollection.find({
+    "dt" : {"$gte": ISODate("2013-10-01T00:00:00.000Z")}
+})
+
+db.getCollection('fuel-sale').find({"Date": {"$gte": ISODate("2023-04-28T14:04:47.704Z")}});
+db.getCollection('fuel-sale').find({"saledate": {"$gte": ISODate("2023-04-19T00:00:00.000Z")}});
+
+
+db.getCollection('fuel-sale').deleteOne({"name":"manjiri"});
+
+
+
+/******* FuelSale Queries *****************/
+db.createCollection('department-sale');
+
+
+db.getCollection('department-sale').insertOne({"name" : "Accessories", "quantity" : 2, "sale" : 5.72, "profit" : 5.2, "margin" : 5.1, "strsaledate":"2023-04-28", "saledate": new ISODate("2023-04-28")});
+
+db.getCollection('department-sale').insertMany([
+{"name" : "Accessories", "quantity" : 2, "sale" : 5.72, "profit" : 5.2, "margin" : 5.1, "strsaledate":"2023-04-28", "saledate": new ISODate("2023-04-28")},
+{"name" : "Ice-cream", "quantity" : 20, "sale" : 55.72, "profit" : 45.2, "margin" : 75.1, "strsaledate":"2023-04-28", "saledate": new ISODate("2023-04-28")},
+{"name" : "Beer/Wine", "quantity" : 18, "sale" : 6.02, "profit" : 74.2, "margin" : 80.1, "strsaledate":"2023-04-28", "saledate": new ISODate("2023-04-28")},
+{"name" : "Candy", "quantity" : 15, "sale" : 32.02, "profit" : 66.2, "margin" : 75.1, "strsaledate":"2023-04-28", "saledate": new ISODate("2023-04-28")},
+{"name" : "Chips", "quantity" : 7, "sale" : 5.24, "profit" : 51.2, "margin" : 8.1, "strsaledate":"2023-04-28", "saledate": new ISODate("2023-04-28")},
+{"name" : "Grocery", "quantity" : 45, "sale" : 9.02, "profit" : 24.2, "margin" : 30.1, "strsaledate":"2023-04-28", "saledate": new ISODate("2023-04-28")},
+{"name" : "ICE", "quantity" : 4, "sale" : 6.21, "profit" : 16.2, "margin" : 53.1, "strsaledate":"2023-04-28", "saledate": new ISODate("2023-04-28")},
+{"name" : "Lotto", "quantity" : 6, "sale" : 5.56, "profit" : 45.2, "margin" : 54.1, "strsaledate":"2023-04-28", "saledate": new ISODate("2023-04-28")},
+{"name" : "Drinks", "quantity" : 52, "sale" : 8.02, "profit" : 64.2, "margin" : 18.1, "strsaledate":"2023-04-28", "saledate": new ISODate("2023-04-28")},
+{"name" : "Tobaco", "quantity" : 2, "sale" : 4.02, "profit" : 46.2, "margin" : 70.1, "strsaledate":"2023-04-28", "saledate": new ISODate("2023-04-28")}
+]);
+
+
+db.getCollection('department-sale').find();
+
+
+/******* FuelSale Queries *****************/
+db.createCollection('fuel-grade');
+
+db.getCollection('fuel-grade').insertMany([
+{"name":"Regular"},
+{"name":"Plus"},
+{"name":"Premium"},
+{"name":"Disel"}
+]);
+
+db.getCollection('fuel-grade').find();
+
+/******* FuelSale Queries *****************/
+db.createCollection('department-item');
+
+db.getCollection('department-item').insertMany([
+{"name":"Accessories"},
+{"name":"Ice-cream"},
+{"name":"Beer/Wine"},
+{"name":"Candy"},
+{"name":"Chips"},
+{"name":"Grocery"},
+{"name":"ICE"},
+{"name":"Candy"},
+{"name":"Lotto"},
+{"name":"Drinks"},
+{"name":"Tobaco"}
+]);
+
+
+db.getCollection('department-item').find();
