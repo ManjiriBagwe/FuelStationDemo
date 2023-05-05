@@ -1,0 +1,59 @@
+server:
+ port: 8090
+
+eureka:
+ instance:
+  prefer-ip-address : true
+ client:
+   register-with-eureka : true
+   fetch-registry : true
+   service-url:
+    defaultZone: http://localhost:8761/eureka
+    
+     
+spring:
+ application:
+    name: api-gateway
+ cloud:
+    gateway:
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin 
+      globalcors :
+           corsConfigurations:
+              '[/**]' : 
+                  allowedOrigins: "*"
+                  allowedMethods: "*"
+                  allowedHeaders: "*"
+      routes:
+      - id: fuelsale
+        #uri: http://localhost:8083/
+        uri: lb://fuel-sale-service
+        predicates:
+        - Path=/fuel-sale-service/**
+      - id: departmentsale
+        #uri: http://localhost:8084/
+        uri: lb://department-sale-service
+        predicates:
+        - Path=/department-sale-service/**
+      - id: fuelgrade
+        #uri: http://localhost:8081/
+        uri: lb://fuel-grade-service
+        predicates:
+        - Path=/fuel-grade-service/**
+      - id: departmentitem
+        #uri: http://localhost:8084/
+        uri: lb://department-item-service
+        predicates:
+        - Path=/department-item-service/**
+      
+      
+
+
+
+
+
+
+
+
+
+
