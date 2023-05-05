@@ -41,6 +41,7 @@ public class ApiCall {
 	}
 
 	public List<FuelGrade> fallback(Exception ex) {
+		logger.info("[ApiCall][fallback]");
 		logger.info("****************** Inside fallback *******************");
 		return Arrays.asList(new FuelGrade("1", "Sample Grade"));
 	}
